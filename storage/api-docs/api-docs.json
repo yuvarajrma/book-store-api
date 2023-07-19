@@ -1,0 +1,234 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book Store OpenApi",
+        "description": "Book Store OpenApi description",
+        "contact": {
+            "email": "yuvaraj.rma@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get all books",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create book",
+                "description": "Create a book.",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "isbn"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Fundamentals"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Yuvaraj"
+                                    },
+                                    "publication_year": {
+                                        "type": "integer",
+                                        "example": 2023
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "978-0-321-75104-1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book by id",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "getBookById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book by id",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "isbn"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Fundamentals"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Yuvaraj"
+                                    },
+                                    "publication_year": {
+                                        "type": "integer",
+                                        "example": 2023
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "978-0-321-75104-1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book by id",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "failure operation"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Book": {
+                "title": "Book model",
+                "description": "Book model",
+                "required": [
+                    "title",
+                    "isbn"
+                ],
+                "xml": {
+                    "name": "Book"
+                }
+            }
+        }
+    }
+}

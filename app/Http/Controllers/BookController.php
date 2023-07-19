@@ -11,7 +11,34 @@ use App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
-    // store the book information
+    /**
+     * @OA\Post(
+     *     path="/api/books",
+     *     tags={"Books"},
+     *     summary="Create book",
+     *     description="Create a book.",
+     *     operationId="store",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\JsonContent(),
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *              type="object",
+     *               required={"title","isbn"},
+     *                  @OA\Property(property="title", type="string", example="Laravel Fundamentals"),
+     *                  @OA\Property(property="author", type="string", example="Yuvaraj"),
+     *                  @OA\Property(property="publication_year", type="integer", example=2023),
+     *                  @OA\Property(property="isbn", type="string", example="978-0-321-75104-1"),
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function store(StoreBookRequest $request)
     {
         $book = Book::create($request->validated());
@@ -19,7 +46,44 @@ class BookController extends Controller
         return response(BookResource::make($book));
     }
 
-    // update the book information
+    /**
+     * @OA\Put(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Update book by id",
+     *     description="Update book by id",
+     *     operationId="update",
+     *     deprecated=false,
+     * @OA\Parameter(
+     *      name="id",
+     *      description="ID of Book",
+     *      in="path",
+     *      required=true,
+     *      example=1,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *              type="object",
+     *               required={"title","isbn"},
+     *                  @OA\Property(property="title", type="string", example="Laravel Fundamentals"),
+     *                  @OA\Property(property="author", type="string", example="Yuvaraj"),
+     *                  @OA\Property(property="publication_year", type="integer", example=2023),
+     *                  @OA\Property(property="isbn", type="string", example="978-0-321-75104-1"),
+     *              )
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function update(UpdateBookRequest $request, Book $book)
     {
         $book->update($request->validated());
@@ -27,7 +91,38 @@ class BookController extends Controller
         return response(BookResource::make($book));
     }
 
-    // get all books with pagination
+    /**
+     * @OA\Get(
+     *     path="/api/books",
+     *     tags={"Books"},
+     *     summary="Get all books",
+     *     description="Get all books",
+     *     operationId="index",
+     *     deprecated=false,
+     * @OA\Parameter(
+     *      name="page",
+     *      in="query",
+     *      required=false,
+     *      example=1,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="per_page",
+     *      in="query",
+     *      required=false,
+     *      example=10,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $page = $request->page ?? 1;
@@ -47,13 +142,63 @@ class BookController extends Controller
         return response($res);
     }
 
-    // get all books with pagination
+    /**
+     * @OA\Get(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Get book by id",
+     *     description="Get book by id",
+     *     operationId="getBookById",
+     *     deprecated=false,
+     * @OA\Parameter(
+     *      name="id",
+     *      description="ID of Book",
+     *      in="path",
+     *      required=true,
+     *      example=1,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function getBookById(Request $request, Book $book)
     {
         return response(BookResource::make($book));
     }
 
-    // get all books with pagination
+    /**
+     * @OA\Delete(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Delete book by id",
+     *     description="Delete book by id",
+     *     operationId="destroy",
+     *     deprecated=false,
+     * @OA\Parameter(
+     *      name="id",
+     *      description="ID of Book",
+     *      in="path",
+     *      required=true,
+     *      example=1,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="failure operation"
+     *     )
+     * )
+     */
     public function destroy(Request $request, Book $book)
     {
         $book->delete();
