@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBookRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,6 +21,7 @@ class StoreBookRequest extends FormRequest
      */
     public function rules(): array
     {
+        $bookId = $this->route('book')->id;
         return [
             'title' => 'required|string',
             'author' => 'nullable|string',
@@ -29,7 +30,7 @@ class StoreBookRequest extends FormRequest
                 'required',
                 'string',
                 'regex:/^(?:(?:\d{9}[\d|X])|(?:\d{13})|(?:\d{1}-\d{3}-\d{5}-[\d|X]))$/',
-                'unique:books,isbn'
+                'unique:books,isbn,' . $bookId  // to skip the current book isbn check
             ],
         ];
     }
