@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author')->nullable();
-            $table->year('year')->nullable();
+            $table->year('publication_year')->nullable();
             $table->string('isbn')->unique();
             $table->softDeletes();
             $table->timestamps();
