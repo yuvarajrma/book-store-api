@@ -13,6 +13,10 @@ This is a simple REST API for interacting with the Book Store. Developed using t
 Use the following command to install dependencies:
 - composer install
 
+Update database configuration in .env
+- DB_USERNAME
+- DB_PASSWORD
+
 To run the database migrations:
 - php artisan migrate
 
