@@ -22,7 +22,7 @@
                     "Books"
                 ],
                 "summary": "Get all books",
-                "description": "Multiple status values can be provided with comma separated string",
+                "description": "Get all books",
                 "operationId": "index",
                 "parameters": [
                     {
@@ -106,7 +106,7 @@
                     "Books"
                 ],
                 "summary": "Get book by id",
-                "description": "Multiple status values can be provided with comma separated string",
+                "description": "Get book by id",
                 "operationId": "getBookById",
                 "parameters": [
                     {
@@ -131,8 +131,8 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Get book by id",
-                "description": "Multiple status values can be provided with comma separated string",
+                "summary": "Update book by id",
+                "description": "Update book by id",
                 "operationId": "update",
                 "parameters": [
                     {
@@ -189,8 +189,8 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Get book by id",
-                "description": "Multiple status values can be provided with comma separated string",
+                "summary": "Delete book by id",
+                "description": "Delete book by id",
                 "operationId": "destroy",
                 "parameters": [
                     {
