@@ -10,7 +10,7 @@ This is a simple REST API for interacting with the Book Store. Developed using t
 
 ## Installation
 
-Use the following command to install:
+Use the following command to install dependencies:
 - composer install
 
 To run the database migrations:
